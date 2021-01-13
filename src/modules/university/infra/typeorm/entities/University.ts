@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -8,6 +9,7 @@ import {
 
 @Entity('university')
 class University {
+  @Exclude()
   @PrimaryGeneratedColumn('increment')
   id: BigInt;
 
@@ -20,6 +22,7 @@ class University {
   @Column('varchar')
   logo_url: string;
 
+  @Exclude()
   @CreateDateColumn()
   created_at: Date;
 }

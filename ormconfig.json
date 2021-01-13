@@ -7,11 +7,9 @@
   "password": "docker",
   "database": "quero",
   "entities": ["./src/modules/**/infra/typeorm/entities/*.ts"],
-  "seeds": ["./src/modules/**/infra/seeds/*.ts"],
-  "factories": ["./src/modules/**/infra/factory/*.ts"],
   "migrations": ["./src/shared/infra/typeorm/migrations/*.ts"],
   "cli": {
     "migrationsDir": "./src/shared/infra/typeorm/migrations/"
   },
-  "logging": "advanced-console"
+  "logging": ["error"]
 }

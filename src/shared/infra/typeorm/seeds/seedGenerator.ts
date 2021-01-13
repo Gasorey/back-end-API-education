@@ -1,6 +1,6 @@
 import { getRandomNumber } from '@shared/utils/utils';
 import { formatISO } from 'date-fns';
-import Faker from 'faker';
+import * as Faker from 'faker/locale/pt_BR';
 
 // Faker.setLocale('pt_BR');
 
@@ -12,7 +12,7 @@ const fakeUniversities = [...Array(100)].map(university => ({
 
 const fakeCampus = [...Array(100)].map(campus => ({
   name: Faker.address.state(),
-  city: Faker.address.city(),
+  city: Faker.address.streetName(),
   university_id: getRandomNumber(1, 100).toFixed(0),
 }));
 

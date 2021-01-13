@@ -1,8 +1,10 @@
-import { createConnection } from 'typeorm';
-
-try {
-  createConnection();
-  console.log('Connected');
-} catch (err) {
-  console.log(err, 'Failed Connection');
-}
+import { createConnection, getConnection } from 'typeorm';
+export const connection = {
+  async connect() {
+    await createConnection();
+    console.log('Connected');
+  },
+  async close() {
+    await getConnection().close();
+  },
+};

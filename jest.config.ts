@@ -3,8 +3,10 @@
  * https://jestjs.io/docs/en/configuration.html
  */
 
-const { pathsToModuleNameMapper } = require('ts-jest/utils');
+// const { } = require('ts-jest/utils');
+import { pathsToModuleNameMapper } from 'ts-jest/utils';
 const { compilerOptions } = require('./tsconfig.json');
+// import { compilerOptions } from './tsconfig.json';
 
 export default {
   // All imported modules in your tests should be mocked automatically
@@ -64,9 +66,7 @@ export default {
   // maxWorkers: "50%",
 
   // An array of directory names to be searched recursively up from the requiring module's location
-  // moduleDirectories: [
-  //   "node_modules"
-  // ],
+  // moduleDirectories: ['node_modules'],
 
   // An array of file extensions your modules use
   // moduleFileExtensions: [

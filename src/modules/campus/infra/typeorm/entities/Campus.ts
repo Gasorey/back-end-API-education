@@ -1,4 +1,5 @@
 import University from '@modules/university/infra/typeorm/entities/University';
+import { Exclude } from 'class-transformer';
 import {
   Entity,
   Column,
@@ -10,6 +11,7 @@ import {
 
 @Entity('campus')
 class Campus {
+  @Exclude()
   @PrimaryGeneratedColumn('increment')
   id: BigInt;
 
@@ -19,9 +21,11 @@ class Campus {
   @Column('varchar')
   city: string;
 
+  @Exclude()
   @Column('int')
   university_id: number;
 
+  @Exclude()
   @CreateDateColumn()
   created_at: Date;
 
