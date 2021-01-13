@@ -9,14 +9,20 @@ export default class CourseController {
     console.log(
       `Course Controller Start | ${JSON.stringify(request.query, null, 2)}`,
     );
+    // console.log(request);
 
     const { university_name, kind, level, shift } = request.query;
 
-    console.log(university_name, kind, level, shift);
+    const filters = {
+      university_name,
+      kind,
+      level,
+      shift,
+    };
 
     const indexCourse = container.resolve(IndexCourseService);
 
-    const course = await indexCourse.execute({});
+    const course = await indexCourse.execute(request.query);
     return response.json({ course: classToClass(course) });
   }
 }

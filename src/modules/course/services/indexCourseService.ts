@@ -31,12 +31,22 @@ export default class IndexCourseService {
     console.log(
       `Course Index Service Start | ${JSON.stringify(filters, null, 2)}`,
     );
+    console.log(filters, 'filters');
 
     if (filters) {
+      // const newFilter = {
+      //   university: {
+      //     university_name: filters.university_name,
+      //   },
+      //   kind: filters.kind,
+      //   shift: filters.shift,
+      //   level: filters.level,
+      // };
+      // console.log(newFilter);
       const course = await this.courseRepository.index(filters);
       return course;
     }
-    const course = await this.courseRepository.index(filters);
+    const course = await this.courseRepository.index();
     return course;
   }
 }
