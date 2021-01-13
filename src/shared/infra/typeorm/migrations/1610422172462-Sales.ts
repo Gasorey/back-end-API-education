@@ -7,17 +7,16 @@ import {
 
 export default class Sales1610422172462 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.query(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`);
     await queryRunner.createTable(
       new Table({
         name: 'sales',
         columns: [
           {
             name: 'id',
-            type: 'uuid',
+            type: 'int',
             isPrimary: true,
-            generationStrategy: 'uuid',
-            default: 'uuid_generate_v4()',
+            isGenerated: true,
+            generationStrategy: 'increment',
           },
           {
             name: 'full_price',
@@ -28,8 +27,12 @@ export default class Sales1610422172462 implements MigrationInterface {
             type: 'float',
           },
           {
+            name: 'discount_percentage',
+            type: 'float',
+          },
+          {
             name: 'start_date',
-            type: 'timestamp',
+            type: 'varchar',
           },
           {
             name: 'enrollment_semester',
@@ -51,6 +54,11 @@ export default class Sales1610422172462 implements MigrationInterface {
           {
             name: 'course_id',
             type: 'int',
+          },
+          {
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'now()',
           },
         ],
       }),

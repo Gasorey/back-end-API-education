@@ -1,8 +1,8 @@
 import 'reflect-metadata';
 import 'dotenv';
+import '@shared/infra/typeorm/';
 import 'express-async-errors';
 import express from 'express';
-import '@shared/infra/typeorm/';
 import cors from 'cors';
 
 const app = express();

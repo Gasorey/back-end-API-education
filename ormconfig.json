@@ -1,18 +1,17 @@
 {
-  "type":"postgres",
-  "host":"localhost",
-  "port":5432,
-  "username":"postgres",
-  "password":"docker",
-  "database":"postgres",
-  "entities":[
-    "./src/modules/**/infra/typeorm/entities/*.ts"
-  ],
-  "migrations":[
-    "./src/shared/infra/typeorm/migrations/*.ts"
-  ],
-  "cli":{
-    "migrationsDir":"./src/shared/infra/typeorm/migrations/"
+  "name": "default",
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "username": "quero",
+  "password": "docker",
+  "database": "quero",
+  "entities": ["./src/modules/**/infra/typeorm/entities/*.ts"],
+  "seeds": ["./src/modules/**/infra/seeds/*.ts"],
+  "factories": ["./src/modules/**/infra/factory/*.ts"],
+  "migrations": ["./src/shared/infra/typeorm/migrations/*.ts"],
+  "cli": {
+    "migrationsDir": "./src/shared/infra/typeorm/migrations/"
   },
-  "logging": ["error"]
+  "logging": "advanced-console"
 }

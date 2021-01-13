@@ -16,23 +16,19 @@ export default class University1610418710844 implements MigrationInterface {
           {
             name: 'name',
             type: 'varchar',
-            isNullable: false,
           },
           {
             name: 'score',
-            type: 'varchar',
-            isNullable: false,
+            type: 'float',
           },
           {
             name: 'logo_url',
             type: 'varchar',
-            isNullable: false,
           },
           {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',
-            isNullable: false,
           },
         ],
       }),
