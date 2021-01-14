@@ -1,9 +1,11 @@
+import authenticator from '@shared/infra/http/middleware/authenticator';
 import { Router } from 'express';
 import SalesController from '../controllers/SalesController';
+const salesController = new SalesController();
 
 const salesRouter = Router();
 
-const salesController = new SalesController();
+salesRouter.use(authenticator);
 
 salesRouter.get('/', salesController.index);
 
