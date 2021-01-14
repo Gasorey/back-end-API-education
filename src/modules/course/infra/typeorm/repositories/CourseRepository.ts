@@ -1,9 +1,9 @@
 import ICourseRepository, {
   Filters,
 } from '@modules/course/repositories/ICourseRepository';
-import { getRepository, Repository, getManager } from 'typeorm';
+import { plainToClass } from 'class-transformer';
+import { getRepository, Repository } from 'typeorm';
 import Course from '../entities/Course';
-
 class CourseRepository implements ICourseRepository {
   private ormRepository: Repository<Course>;
 
@@ -16,7 +16,7 @@ class CourseRepository implements ICourseRepository {
       `Course Repository Index START | ${JSON.stringify(filters, null, 2)}`,
     );
     if (filters?.university_name) {
-      const course = await this.ormRepository
+      const getCourse = await this.ormRepository
         .createQueryBuilder('course')
         .innerJoinAndSelect('course.university', 'university')
         .innerJoinAndSelect('course.campus', 'campus')
@@ -34,8 +34,8 @@ class CourseRepository implements ICourseRepository {
             shift: filters.shift,
           },
         )
-        .getMany();
-      return course;
+        .getRawMany();
+      return getCourse;
     }
     const course = await this.ormRepository.find({
       relations: ['university', 'campus'],

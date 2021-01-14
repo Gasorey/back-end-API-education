@@ -2,7 +2,7 @@ import IndexCourseService from '@modules/course/services/indexCourseService';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { Filters } from '@modules/course/repositories/ICourseRepository';
-import { classToClass } from 'class-transformer';
+import { classToClass, classToClassFromExist } from 'class-transformer';
 
 export default class CourseController {
   public async index(request: Request, response: Response): Promise<Response> {
@@ -13,16 +13,19 @@ export default class CourseController {
 
     const { university_name, kind, level, shift } = request.query;
 
-    const filters = {
-      university_name,
-      kind,
-      level,
-      shift,
-    };
-
     const indexCourse = container.resolve(IndexCourseService);
 
-    const course = await indexCourse.execute(request.query);
-    return response.json({ course: classToClass(course) });
+    const getCourse = await indexCourse.execute(request.query);
+
+    if (getCourse) {
+      const course = getCourse.map(curCourse => {
+        const course = {
+          course: curCourse,
+        };
+        return course;
+      });
+      return response.json(classToClass(course));
+    }
+    return response.json().status(204);
   }
 }

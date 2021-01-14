@@ -20,7 +20,7 @@ const fakeCourse = [...Array(100)].map(course => ({
   name: Faker.name.jobArea(),
   kind: Faker.random.arrayElement(['Presencial', 'EaD', 'Hibrido']),
   level: Faker.random.arrayElement([
-    'Técnologo',
+    'Tecnólogo',
     'Bacharelado',
     'Licenciatura',
   ]),

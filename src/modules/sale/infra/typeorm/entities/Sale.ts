@@ -1,6 +1,7 @@
 import Campus from '@modules/campus/infra/typeorm/entities/Campus';
 import Course from '@modules/course/infra/typeorm/entities/Course';
 import University from '@modules/university/infra/typeorm/entities/University';
+import { Exclude } from 'class-transformer';
 import {
   PrimaryGeneratedColumn,
   Column,
@@ -12,6 +13,7 @@ import {
 
 @Entity('sales')
 class Sale {
+  @Exclude()
   @PrimaryGeneratedColumn('increment')
   id: bigint;
 
@@ -33,17 +35,25 @@ class Sale {
   @Column('boolean')
   enabled: Boolean;
 
+  @Exclude()
   @Column('int')
   university_id: number;
 
+  @Exclude()
   @Column('int')
   campus_id: number;
 
+  @Exclude()
   @Column('int')
   course_id: number;
 
+  @Exclude()
   @CreateDateColumn()
   created_at: Date;
+
+  @ManyToOne(() => Course)
+  @JoinColumn({ name: 'course_id' })
+  course: Course;
 
   @ManyToOne(() => University)
   @JoinColumn({ name: 'university_id' })
@@ -52,10 +62,6 @@ class Sale {
   @ManyToOne(() => Campus)
   @JoinColumn({ name: 'campus_id' })
   campus: Campus;
-
-  @ManyToOne(() => Course)
-  @JoinColumn({ name: 'course_id' })
-  course: Course;
 }
 
 export default Sale;
