@@ -2,7 +2,7 @@
   "name": "default",
   "type": "postgres",
   "host": "localhost",
-  "port": "Num_port",
+  "port": 5432,
   "username": "quero",
   "password": "docker",
   "database": "quero",
