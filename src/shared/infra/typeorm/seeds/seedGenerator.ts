@@ -6,7 +6,10 @@ import * as Faker from 'faker/locale/pt_BR';
 
 const fakeUniversities = [...Array(100)].map(university => ({
   name: Faker.company.companyName(),
-  score: Faker.random.float(10),
+  score: Faker.random.float({
+    max: 10,
+    min: 0,
+  }),
   logo_url: Faker.image.imageUrl(),
 }));
 
@@ -44,7 +47,7 @@ const fakeSales = [...Array(100)].map(sale => {
       : Faker.random.number({ min: 1, max: 6 });
   const newSale = {
     full_price: full_price,
-    price_with_discount: Number((full_price * (discount / 100)).toFixed(2)),
+    price_with_discount: Number((full_price * (1 - discount / 100)).toFixed(2)),
     discount_percentage: discount,
     start_date: `${Faker.random.number({
       min: 1,

@@ -1,8 +1,10 @@
 import { connection } from '@shared/infra/typeorm';
+import FakeCacheProvider from '@shared/providers/CacheProvider/fakers/FakeCacheProvider';
 import CourseRepository from '../infra/typeorm/repositories/CourseRepository';
 import IndexCourseService from './indexCourseService';
 
 let courseRepository: CourseRepository;
+let cacheProvider: FakeCacheProvider;
 let indexCourseService: IndexCourseService;
 
 describe('Index Courses', () => {
@@ -11,7 +13,11 @@ describe('Index Courses', () => {
   });
   beforeEach(async () => {
     courseRepository = new CourseRepository();
-    indexCourseService = new IndexCourseService(courseRepository);
+    cacheProvider = new FakeCacheProvider();
+    indexCourseService = new IndexCourseService(
+      courseRepository,
+      cacheProvider,
+    );
   });
   it('should be able to list courses', async () => {
     const courses = await indexCourseService.execute();

@@ -2,40 +2,40 @@ import { inject, injectable } from 'tsyringe';
 import { clearObj } from '@shared/utils/utils';
 import Sale from '../infra/typeorm/entities/Sale';
 import ISaleRepository, { Filters } from '../repositories/ISaleRepository';
+import ICacheProvider from '@shared/providers/CacheProvider/models/ICacheProvider';
+import { classToClass } from 'class-transformer';
 
 @injectable()
 class IndexSalesService {
   constructor(
     @inject('SaleRepository')
     private saleRepository: ISaleRepository,
+    @inject('CacheProvider')
+    private cacheProvider: ICacheProvider,
   ) {}
 
   public async execute(filters?: Filters, order?: string): Promise<Sale[]> {
-    console.log(
-      `Sale Service Index START | Filters: ${JSON.stringify(
-        filters,
-        null,
-        2,
-      )} Order: ${JSON.stringify(order, null, 2)}`,
-    );
-    if (filters) {
-      clearObj(filters);
+    clearObj(filters);
 
-      const sales = await this.saleRepository.index(filters, order);
-      if (order === 'ASC') {
+    let sales = await this.cacheProvider.recovery<Sale[]>(
+      `sales-list-filtersBy:${JSON.stringify(filters)}:${JSON.stringify(
+        order,
+      )}`,
+    );
+    if (!sales) {
+      sales = await this.saleRepository.index(filters, String(order));
+      if (order === 'desc') {
         sales.sort((a, b) => b.price_with_discount - a.price_with_discount);
-      } else if (order === 'DESC') {
+      } else if (order === 'asc') {
         sales.sort((a, b) => a.price_with_discount - b.price_with_discount);
       }
-
-      return sales;
+      await this.cacheProvider.save(
+        `sales-list-filtersBy:${JSON.stringify(filters)}:${JSON.stringify(
+          order,
+        )}`,
+        classToClass(sales),
+      );
     }
-    const sales = await this.saleRepository.index();
-
-    if (order === 'ASC') {
-      sales.sort((a, b) => b.price_with_discount - a.price_with_discount);
-    }
-    sales.sort((a, b) => a.price_with_discount - b.price_with_discount);
     return sales;
   }
 }

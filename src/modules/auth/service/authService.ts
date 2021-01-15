@@ -21,7 +21,6 @@ class AuthService {
         'I hope you guys like this application that was a pleasure to create :D',
       expiresIn: authConfig.jwt.expiresIn,
     });
-    console.log(token);
     return { token };
   }
 }

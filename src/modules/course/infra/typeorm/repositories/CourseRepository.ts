@@ -12,9 +12,6 @@ class CourseRepository implements ICourseRepository {
   }
 
   public async index(filters?: Filters): Promise<Course[]> {
-    console.log(
-      `Course Repository Index START | ${JSON.stringify(filters, null, 2)}`,
-    );
     if (filters?.university_name) {
       const getCourse = await this.ormRepository
         .createQueryBuilder('course')

@@ -13,7 +13,6 @@ class SalesRepository implements ISaleRepository {
 
   public async index(filters: Filters, order?: any): Promise<Sale[]> {
     if (filters && Object.keys(filters).length > 1) {
-      console.log(filters, 'inside');
       const getSale = await this.ormRepository
         .createQueryBuilder('sale')
         .innerJoinAndSelect('sale.course', 'course')

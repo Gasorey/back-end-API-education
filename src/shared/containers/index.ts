@@ -3,6 +3,7 @@ import ICourseRepository from '@modules/course/repositories/ICourseRepository';
 import SalesRepository from '@modules/sale/infra/typeorm/repositories/SaleRepository';
 import ISaleRepository from '@modules/sale/repositories/ISaleRepository';
 import { container } from 'tsyringe';
+import '@shared/providers/CacheProvider';
 
 container.registerSingleton<ICourseRepository>(
   'CourseRepository',
