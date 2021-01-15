@@ -1,5 +1,4 @@
 import { getRandomNumber } from '@shared/utils/utils';
-import { formatISO } from 'date-fns';
 import * as Faker from 'faker/locale/pt_BR';
 
 // Faker.setLocale('pt_BR');
