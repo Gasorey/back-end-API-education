@@ -75,7 +75,7 @@ Body:
     }
 ```
 
-Response objtido pela rota auth:
+Response obtido pela rota auth:
 
 ```
 {
@@ -91,7 +91,7 @@ GET  localhost:3333/course
 
 Esse endpoint pode ser filtrado por, shift, kind, level, university_name, passe os parametros desejados no campo de params
 
-** Se atente as intruções passadas no topico Faker.JS **
+**_ Se atente as intruções passadas no topico Faker.JS _**
 
 Exemplo response:
 
@@ -162,5 +162,7 @@ em limiter altere os points (quantidade de requests) e duration (tempo até que 
 ## Postman
 
 ```
+
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/86b4cbf2a08b6a9eb02e)
+
 ```
