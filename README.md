@@ -161,8 +161,6 @@ em limiter altere os points (quantidade de requests) e duration (tempo até que 
 
 ## Postman
 
-```
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/86b4cbf2a08b6a9eb02e)
 
-```
