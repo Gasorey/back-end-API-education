@@ -10,15 +10,17 @@ import cors from 'cors';
 import routes from './routes';
 import { connection } from '@shared/infra/typeorm/';
 import AppError from '@shared/errors/AppError';
+import rateLimiter from './middleware/RateLimiter';
 
 const app = express();
 
 connection.connect();
+
+app.use(rateLimiter);
 app.use(cors());
-
 app.use(express.json());
-
 app.use(routes);
+
 app.use(errors());
 
 //AppError middleware
